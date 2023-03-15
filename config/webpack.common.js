@@ -1,9 +1,10 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const ROOT = path.resolve('./');
 const PATH = {
-  build: path.resolve(__dirname, "build"),
-  public: path.resolve(__dirname, "public"),
+  build: path.resolve(ROOT, "build"),
+  public: path.resolve(ROOT, "public"),
 };
 
 module.exports = {
