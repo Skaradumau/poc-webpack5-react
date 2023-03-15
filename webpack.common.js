@@ -12,6 +12,7 @@ module.exports = {
     filename: "main.js",
     path: PATH.build,
     assetModuleFilename: 'assets/[hash][ext][query]',
+    clean: true,
   },
   plugins: [
     new HtmlWebpackPlugin({ template: path.join(PATH.public, "index.html") }),
