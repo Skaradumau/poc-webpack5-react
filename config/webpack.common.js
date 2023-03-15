@@ -1,22 +1,35 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const ROOT = path.resolve('./');
 const PATH = {
-  build: path.resolve(ROOT, "build"),
-  public: path.resolve(ROOT, "public"),
+  build: path.resolve(ROOT, 'build'),
+  public: path.resolve(ROOT, 'public'),
 };
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: './src/index.js',
   output: {
-    filename: "main.js",
+    filename: '[name].[contenthash].js',
     path: PATH.build,
-    assetModuleFilename: 'assets/[hash][ext][query]',
+    assetModuleFilename: 'assets/[contenthash][ext]',
     clean: true,
   },
+  optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+      },
+    },
+  },
   plugins: [
-    new HtmlWebpackPlugin({ template: path.join(PATH.public, "index.html") }),
+    new HtmlWebpackPlugin({ template: path.join(PATH.public, 'index.html') }),
   ],
   module: {
     rules: [
@@ -24,7 +37,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: ['babel-loader'],
       },
       // assets
       {
@@ -34,6 +47,6 @@ module.exports = {
     ],
   },
   resolve: {
-    extensions: ["*", ".js", ".jsx"],
+    extensions: ['*', '.js', '.jsx'],
   },
 };
