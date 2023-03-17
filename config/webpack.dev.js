@@ -3,13 +3,15 @@ const path = require("path");
 
 const common = require('./webpack.common.js');
 
-module.exports = merge(common, {
-  mode: "development",
-  devtool: 'inline-source-map',
-  devServer: {
-    static: {
-      directory: path.resolve(path.resolve('./'), "build"),
+module.exports = (env) => {
+  return merge(common(env), {
+    mode: "development",
+    devtool: 'inline-source-map',
+    devServer: {
+      static: {
+        directory: path.resolve(path.resolve('./'), "build"),
+      },
+      port: 3000,
     },
-    port: 3000,
-  },
-});
+  })
+};
