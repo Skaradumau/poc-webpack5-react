@@ -15,7 +15,7 @@ module.exports = (env) => {
   });
 
   return {
-    entry: './src/index.jsx',
+    entry: './src/index.tsx',
     output: {
       filename: '[name].[contenthash].js',
       path: PATH.build,
@@ -41,6 +41,12 @@ module.exports = (env) => {
     ],
     module: {
       rules: [
+        // ts-loader
+        {
+          test: /\.tsx?$/,
+          exclude: /node_modules/,
+          use: 'ts-loader',
+        },
         // babel
         {
           test: /\.(js|jsx)$/,
@@ -55,7 +61,7 @@ module.exports = (env) => {
       ],
     },
     resolve: {
-      extensions: ['*', '.js', '.jsx'],
+      extensions: ['*', '.ts', '.tsx', '.js', '.jsx'],
     },
   };
 };
