@@ -2,6 +2,7 @@ import React from 'react';
 import SVG  from './SVG_Logo.png';
 
 const Hello = () => {
+
   return (
     <div>
       <h1>Hello from React!</h1>
